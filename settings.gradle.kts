@@ -21,8 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "NBA players"
 include(":app")
-include("feature:all-players")
+include(":feature:all-players")
+include(":feature:player-details")
+include(":feature:team-details")
 include(":library:data")
-include(":library:navigation")
 include(":library:networking")
 include(":library:use-case")

@@ -1,0 +1,1 @@
+cz.home.nbaplayers.feature.teamdetails

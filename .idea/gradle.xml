@@ -13,9 +13,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/all-players" />
+            <option value="$PROJECT_DIR$/feature/player-details" />
+            <option value="$PROJECT_DIR$/feature/team-details" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/library/data" />
-            <option value="$PROJECT_DIR$/library/navigation" />
             <option value="$PROJECT_DIR$/library/networking" />
             <option value="$PROJECT_DIR$/library/use-case" />
           </set>
