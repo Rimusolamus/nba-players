@@ -1,21 +1,19 @@
 package cz.home.nbaplayers.feature.allplayers.system
 
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -65,8 +63,12 @@ private fun AllPlayersScreenImpl(
         PullToRefreshBox(
             isRefreshing = isLoading,
             onRefresh = onRefresh,
-            modifier = Modifier.padding(innerPadding)
-        ) {
+            modifier = Modifier.padding(
+                top = innerPadding.calculateTopPadding(),
+                bottom = innerPadding.calculateBottomPadding()
+            )
+        )
+        {
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -76,17 +78,26 @@ private fun AllPlayersScreenImpl(
                     items(it) { index ->
                         ListItem(
                             headlineContent = {
-                                Column(modifier = Modifier.padding(8.dp)) {
+                                Row {
+                                    Column(modifier = Modifier
+                                        .padding(8.dp)
+                                        .weight(1f)) {
+                                        Text(
+                                            text = "${players[index].firstName} ${players[index].lastName}",
+                                        )
+                                        Spacer(modifier = Modifier.height(8.dp))
+                                        Text(
+                                            text = "Position: ${players[index].position}",
+                                        )
+                                    }
                                     Text(
-                                        text = "${players[index].firstName} ${players[index].lastName}",
-                                    )
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                    Text(
-                                        text = "Position: ${players[index].position}",
+                                        text = players[index].team.name,
+                                        modifier = Modifier.padding(8.dp)
                                     )
                                 }
                             },
                             modifier = Modifier
+                                .background(MaterialTheme.colorScheme.primary)
                                 .animateItem()
                                 .fillParentMaxWidth()
                                 .padding(horizontal = 8.dp, vertical = 0.dp)

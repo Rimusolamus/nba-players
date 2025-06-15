@@ -18,28 +18,15 @@ internal class AllPlayersViewModel(
         get() = _uiState
 
     init {
-        viewModelScope.launch {
-            getAllPlayers().collect { result ->
-                when (result) {
-                    is Data.Loading -> {
-                        _uiState.value = State(isLoading = true)
-                    }
-
-                    is Data.Success -> {
-                        _uiState.value = State(players = result.value, isLoading = false)
-                    }
-
-                    is Data.Error -> {
-                        _uiState.value = State(error = result.exception, isLoading = false)
-                    }
-                }
-            }
-        }
+        fetchPlayers()
     }
 
     fun onRefresh() {
+        fetchPlayers()
+    }
+
+    private fun fetchPlayers() {
         viewModelScope.launch {
-            _uiState.value = State(isLoading = true)
             getAllPlayers().collect { result ->
                 when (result) {
                     is Data.Loading -> {

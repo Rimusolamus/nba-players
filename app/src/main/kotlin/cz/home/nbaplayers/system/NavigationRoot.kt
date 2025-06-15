@@ -35,7 +35,6 @@ fun NavigationRoot(
                     onPlayerClick = { playerId ->
                         backStack.add(PlayerDetailsNav(playerId))
                     },
-                    modifier = Modifier
                 ) }
                 is PlayerDetailsNav -> NavEntry(key = key) {
                     PlayerDetailsScreen(
