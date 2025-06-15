@@ -1,5 +1,9 @@
 package cz.home.nbaplayers.system
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,35 +28,50 @@ fun NavigationRoot(
 ) {
     val backStack = rememberNavBackStack(AllPlayersNav)
 
-    NavDisplay(
-        modifier = modifier,
-        backStack = backStack,
-        entryDecorators = listOf(
-            rememberSavedStateNavEntryDecorator(),
-            rememberViewModelStoreNavEntryDecorator(),
-            rememberSceneSetupNavEntryDecorator()
-        ),
-        entryProvider = { key ->
-            when (key) {
-                is AllPlayersNav -> NavEntry(key = key) { AllPlayersScreen(
-                    onPlayerClick = { playerId ->
-                        backStack.add(PlayerDetailsNav(playerId))
-                    },
-                ) }
-                is PlayerDetailsNav -> NavEntry(key = key) {
-                    PlayerDetailsScreen(
-                        viewModel = koinViewModel {
-                            parametersOf(key.playerId)
-                        }
-                    )
+    Box(modifier = modifier
+        .fillMaxSize()
+        .background(MaterialTheme.colorScheme.background)) {
+
+        NavDisplay(
+            modifier = modifier,
+            backStack = backStack,
+            entryDecorators = listOf(
+                rememberSavedStateNavEntryDecorator(),
+                rememberViewModelStoreNavEntryDecorator(),
+                rememberSceneSetupNavEntryDecorator()
+            ),
+            entryProvider = { key ->
+                when (key) {
+                    is AllPlayersNav -> NavEntry(key = key) {
+                        AllPlayersScreen(
+                            onPlayerClick = { playerId ->
+                                backStack.add(PlayerDetailsNav(playerId))
+                            },
+                        )
+                    }
+
+                    is PlayerDetailsNav -> NavEntry(key = key) {
+                        PlayerDetailsScreen(
+                            viewModel = koinViewModel {
+                                parametersOf(key.playerId)
+                            },
+                            onTeamClick = { teamId ->
+                                backStack.add(TeamDetailsNav(teamId))
+                            }
+                        )
+                    }
+
+                    is TeamDetailsNav -> NavEntry(key = key) {
+                        TeamDetailsScreen(
+                            viewModel = koinViewModel {
+                                parametersOf(key.teamId)
+                            }
+                        )
+                    }
+
+                    else -> throw IllegalArgumentException("Unknown screen: $key")
                 }
-                is TeamDetailsNav -> NavEntry(key = key) {
-                    TeamDetailsScreen(
-                        teamId = key.teamId
-                    )
-                }
-                else -> throw IllegalArgumentException("Unknown screen: $key")
             }
-        }
-    )
+        )
+    }
 }

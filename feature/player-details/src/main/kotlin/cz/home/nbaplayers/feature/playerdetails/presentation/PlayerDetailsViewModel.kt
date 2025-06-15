@@ -24,10 +24,6 @@ class PlayerDetailsViewModel(
         }
     }
 
-    fun onRefresh() {
-        fetchPlayerDetails()
-    }
-
     private fun fetchPlayerDetails() {
         viewModelScope.launch {
             getPlayerDetails(playerId).collect { result ->

@@ -26,8 +26,18 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.shimmer)
+
+    implementation(platform(libs.di.koin.bom))
+    implementation(libs.di.koin.core)
+    implementation(libs.di.koin.android)
+    implementation(libs.di.koin.compose)
+
+    implementation(platform(libs.networking.retrofit2.bom))
+    implementation(libs.networking.retrofit2.retrofit)
 
     implementation(project(":library:data"))
     implementation(project(":library:networking"))

@@ -3,6 +3,7 @@ package cz.home.nbaplayers.system
 import android.app.Application
 import cz.home.nbaplayers.feature.allplayers.di.allPlayersModule
 import cz.home.nbaplayers.feature.playerdetails.di.playerDetailsModule
+import cz.home.nbaplayers.feature.teamdetails.di.teamDetailModule
 import cz.home.nbaplayers.library.networking.di.networkingModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -22,6 +23,7 @@ internal class MainApplication: Application() {
                 // feature modules
                 allPlayersModule,
                 playerDetailsModule,
+                teamDetailModule,
                 // library modules
                 networkingModule
             )
