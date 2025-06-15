@@ -42,13 +42,11 @@ fun NavigationRoot(
                         playerId = key.playerId
                     )
                 }
-
                 is TeamDetailsNav -> NavEntry(key = key) {
                     TeamDetailsScreen(
                         teamId = key.teamId
                     )
                 }
-
                 else -> throw IllegalArgumentException("Unknown screen: $key")
             }
         }

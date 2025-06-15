@@ -8,7 +8,10 @@ dependencies {
 
     implementation(platform(libs.networking.retrofit2.bom))
     implementation(libs.networking.retrofit2.retrofit)
-    implementation(libs.networking.retrofit2.moshiConverter)
+    implementation(libs.networking.retrofit2.gsonConverter)
+    implementation(libs.networking.gson)
 
-    implementation(libs.networking.moshi)
+    implementation(libs.kotlin.coroutines.core)
+
+    implementation(project(":library:data"))
 }

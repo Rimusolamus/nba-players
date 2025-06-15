@@ -1,16 +1,15 @@
 package cz.home.nbaplayers.library.networking.di
 
+import cz.home.nbaplayers.library.networking.data.AbstractApi
 import cz.home.nbaplayers.library.networking.infrastructure.ApiService
 import cz.home.nbaplayers.library.networking.infrastructure.AuthInterceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private fun provideToken(): String {
-    return "39f00294-ac83-47a8-9ce4-18b3edc84a19"
-}
+private fun provideToken(): String = "39f00294-ac83-47a8-9ce4-18b3edc84a19"
 
 private fun provideBaseUrl(): String {
     return "https://api.balldontlie.io"
@@ -18,8 +17,7 @@ private fun provideBaseUrl(): String {
 
 val networkingModule = module {
     single {
-        // inject a service here that retrieves the token
-        AuthInterceptor { provideToken() }
+        AuthInterceptor({ provideToken() })
     }
 
     single<OkHttpClient> {
@@ -34,8 +32,12 @@ val networkingModule = module {
              // inject a service here that retrieves the base URL
              .baseUrl(provideBaseUrl())
              .client(get<OkHttpClient>())
-             .addConverterFactory(MoshiConverterFactory.create())
+             .addConverterFactory(GsonConverterFactory.create())
              .build()
              .create(ApiService::class.java)
+    }
+
+    single<AbstractApi> {
+        AbstractApi()
     }
 }

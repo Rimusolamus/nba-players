@@ -18,7 +18,6 @@
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/library/data" />
             <option value="$PROJECT_DIR$/library/networking" />
-            <option value="$PROJECT_DIR$/library/use-case" />
           </set>
         </option>
       </GradleProjectSettings>

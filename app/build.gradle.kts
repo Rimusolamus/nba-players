@@ -24,6 +24,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -69,7 +72,6 @@ dependencies {
     implementation(project(":feature:player-details"))
     implementation(project(":feature:team-details"))
     implementation(project(":library:networking"))
-    implementation(project(":library:use-case"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

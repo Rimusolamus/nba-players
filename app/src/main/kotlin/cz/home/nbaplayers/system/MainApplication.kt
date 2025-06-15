@@ -1,6 +1,7 @@
 package cz.home.nbaplayers.system
 
 import android.app.Application
+import cz.home.nbaplayers.feature.allplayers.di.allPlayersModule
 import cz.home.nbaplayers.library.networking.di.networkingModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,7 +19,7 @@ internal class MainApplication: Application() {
             // modules to load
             modules(
                 // feature modules
-
+                allPlayersModule,
                 // library modules
                 networkingModule
             )
