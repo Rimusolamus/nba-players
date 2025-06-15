@@ -2,6 +2,7 @@ package cz.home.nbaplayers.system
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -14,6 +15,8 @@ import cz.home.nbaplayers.feature.teamdetails.system.TeamDetailsScreen
 import cz.home.nbaplayers.model.AllPlayersNav
 import cz.home.nbaplayers.model.PlayerDetailsNav
 import cz.home.nbaplayers.model.TeamDetailsNav
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun NavigationRoot(
@@ -38,7 +41,9 @@ fun NavigationRoot(
                 ) }
                 is PlayerDetailsNav -> NavEntry(key = key) {
                     PlayerDetailsScreen(
-                        playerId = key.playerId
+                        viewModel = koinViewModel {
+                            parametersOf(key.playerId)
+                        }
                     )
                 }
                 is TeamDetailsNav -> NavEntry(key = key) {

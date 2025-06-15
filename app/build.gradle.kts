@@ -67,6 +67,7 @@ dependencies {
     implementation(platform(libs.di.koin.bom))
     implementation(libs.di.koin.core)
     implementation(libs.di.koin.android)
+    implementation(libs.di.koin.compose)
 
     implementation(project(":feature:all-players"))
     implementation(project(":feature:player-details"))

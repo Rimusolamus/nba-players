@@ -17,19 +17,19 @@ import java.net.UnknownHostException
 
 class AbstractApi {
     fun <DTO, MODEL> request(
-        callApi: suspend () -> Response<DTO>,
+        fetchData: suspend () -> Response<DTO>,
         parseDto: DTO.() -> MODEL
     ): Flow<LoadableData<MODEL>> = flow {
         emit(Data.Loading)
 
-        emit(requestSynchronous(callApi, parseDto).toLoadableData())
+        emit(requestSynchronous(fetchData, parseDto).toLoadableData())
     }
 
     private suspend fun <DTO, MODEL> requestSynchronous(
-        callApi: suspend () -> Response<DTO>,
+        doRequest: suspend () -> Response<DTO>,
         parseDto: (DTO.() -> MODEL),
     ): ResultData<MODEL> {
-        val response = when (val result = executeRequest(callApi)) {
+        val response = when (val result = executeRequest(doRequest)) {
             is Data.Success -> result.value
             is Data.Error -> return result
         }
@@ -39,8 +39,8 @@ class AbstractApi {
         }
     }
 
-    private suspend fun <DTO> executeRequest(callApi: suspend () -> Response<DTO>): ResultData<Response<DTO>> = try {
-        Data.Success(withContext(Dispatchers.IO) { callApi() })
+    private suspend fun <DTO> executeRequest(fetchData: suspend () -> Response<DTO>): ResultData<Response<DTO>> = try {
+        Data.Success(withContext(Dispatchers.IO) { fetchData() })
     } catch (e: Exception) {
         when (e) {
             is SocketTimeoutException -> Data.Error(

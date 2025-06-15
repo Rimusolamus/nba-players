@@ -1,6 +1,7 @@
 package cz.home.nbaplayers.library.networking.infrastructure
 
 import cz.home.nbaplayers.library.networking.model.AllPlayersDto
+import cz.home.nbaplayers.library.networking.model.PlayerDetailsDto
 import cz.home.nbaplayers.library.networking.model.PlayerDto
 import cz.home.nbaplayers.library.networking.model.TeamDto
 import retrofit2.Response
@@ -13,7 +14,7 @@ interface ApiService {
     suspend fun getPlayers(): Response<AllPlayersDto>
 
     @GET("/v1/players/{id}")
-    suspend fun getPlayerById(@Path("id") id: Int): Response<PlayerDto>
+    suspend fun getPlayerById(@Path("id") id: Int): Response<PlayerDetailsDto>
 
     @GET("/v1/teams/{id}")
     suspend fun getTeamById(@Path("id") id: Int): Response<TeamDto>

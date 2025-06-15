@@ -5,8 +5,6 @@ import cz.home.nbaplayers.library.data.infrastructure.LoadableData
 import cz.home.nbaplayers.library.networking.data.AbstractApi
 import cz.home.nbaplayers.library.networking.infrastructure.ApiService
 import cz.home.nbaplayers.feature.allplayers.model.Player
-import cz.home.nbaplayers.feature.allplayers.model.Team
-import cz.home.nbaplayers.library.networking.model.AllPlayersDto
 import kotlinx.coroutines.flow.Flow
 
 internal class RetrofitAllPlayersRepository(
@@ -16,7 +14,7 @@ internal class RetrofitAllPlayersRepository(
 
     override suspend fun getAllPlayers(): Flow<LoadableData<List<Player>>> {
         return abstractApi.request(
-            callApi = { allPlayersService.getPlayers() },
+            fetchData = { allPlayersService.getPlayers() },
             parseDto = { this.data.map { it.toModel() } })
     }
 }
