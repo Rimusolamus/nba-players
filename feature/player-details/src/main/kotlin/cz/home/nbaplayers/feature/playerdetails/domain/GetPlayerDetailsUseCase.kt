@@ -1,6 +1,6 @@
 package cz.home.nbaplayers.feature.playerdetails.domain
 
-class GetPlayerDetailsUseCase(
+internal class GetPlayerDetailsUseCase(
     private val remotePlayerDetailsRepository: RemotePlayerDetailsRepository
 ) {
 

@@ -35,12 +35,16 @@ import com.valentinilk.shimmer.shimmer
 import cz.home.nbaplayers.feature.teamdetails.model.Team
 import cz.home.nbaplayers.feature.teamdetails.presentation.TeamDetailViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TeamDetailsScreen(
-    viewModel: TeamDetailViewModel = koinViewModel<TeamDetailViewModel>(),
+    teamId: Int,
     onBack: () -> Unit = {}
 ) {
+    val viewModel: TeamDetailViewModel = koinViewModel<TeamDetailViewModel> {
+        parametersOf(teamId)
+    }
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     TeamDetailsScreenImpl(state.value.team, isLoading = state.value.isLoading, onBack = onBack)
 }
@@ -51,7 +55,7 @@ fun TeamDetailsScreenImpl(team: Team?, isLoading: Boolean = false, onBack: () ->
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(team?.fullName ?: "Team detail") },
+                title = { Text("Team detail") },
                 navigationIcon = {
                     IconButton(
                         onClick = { onBack() }

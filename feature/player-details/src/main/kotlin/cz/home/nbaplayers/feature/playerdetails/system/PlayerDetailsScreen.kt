@@ -39,13 +39,17 @@ import com.valentinilk.shimmer.shimmer
 import cz.home.nbaplayers.feature.playerdetails.model.Player
 import cz.home.nbaplayers.feature.playerdetails.presentation.PlayerDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun PlayerDetailsScreen(
-    viewModel: PlayerDetailsViewModel = koinViewModel<PlayerDetailsViewModel>(),
+    playerId: Int,
     onTeamClick: (Int) -> Unit,
     onBack: () -> Unit
 ) {
+    val viewModel = koinViewModel<PlayerDetailsViewModel>() {
+        parametersOf(playerId)
+    }
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 
     PlayerDetailsScreenImpl(

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class TeamDetailViewModel(
+internal class TeamDetailViewModel(
     private val getTeamDetailUseCase: GetTeamDetailUseCase,
     teamId: Int
 ): ViewModel() {

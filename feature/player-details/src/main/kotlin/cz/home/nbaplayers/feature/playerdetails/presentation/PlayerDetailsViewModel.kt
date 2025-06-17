@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class PlayerDetailsViewModel(
+internal class PlayerDetailsViewModel(
     private val playerId: Int,
     private val getPlayerDetails: GetPlayerDetailsUseCase
 ): ViewModel() {

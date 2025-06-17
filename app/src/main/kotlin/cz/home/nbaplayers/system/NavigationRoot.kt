@@ -53,9 +53,7 @@ fun NavigationRoot(
 
                     is PlayerDetailsNav -> NavEntry(key = key) {
                         PlayerDetailsScreen(
-                            viewModel = koinViewModel {
-                                parametersOf(key.playerId)
-                            },
+                            playerId = key.playerId,
                             onTeamClick = { teamId ->
                                 backStack.add(TeamDetailsNav(teamId))
                             },
@@ -67,9 +65,7 @@ fun NavigationRoot(
 
                     is TeamDetailsNav -> NavEntry(key = key) {
                         TeamDetailsScreen(
-                            viewModel = koinViewModel {
-                                parametersOf(key.teamId)
-                            },
+                            teamId = key.teamId,
                             onBack = {
                                 backStack.removeLastOrNull()
                             }
