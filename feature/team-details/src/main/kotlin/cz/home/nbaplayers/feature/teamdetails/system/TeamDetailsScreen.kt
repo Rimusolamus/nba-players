@@ -42,12 +42,12 @@ fun TeamDetailsScreen(
     onBack: () -> Unit = {}
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
-    TeamScreen(state.value.team, isLoading = state.value.isLoading, onBack = onBack)
+    TeamDetailsScreenImpl(state.value.team, isLoading = state.value.isLoading, onBack = onBack)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TeamScreen(team: Team?, isLoading: Boolean = false, onBack: () -> Unit = {}) {
+fun TeamDetailsScreenImpl(team: Team?, isLoading: Boolean = false, onBack: () -> Unit = {}) {
     Scaffold(
         topBar = {
             TopAppBar(
