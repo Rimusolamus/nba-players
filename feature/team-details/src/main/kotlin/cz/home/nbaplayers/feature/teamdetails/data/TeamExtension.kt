@@ -1,4 +1,4 @@
-package cz.home.nbaplayers.feature.teamdetails
+package cz.home.nbaplayers.feature.teamdetails.data
 
 import cz.home.nbaplayers.feature.teamdetails.model.Team
 import cz.home.nbaplayers.library.networking.model.TeamDto

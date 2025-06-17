@@ -12,11 +12,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -39,14 +44,16 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PlayerDetailsScreen(
     viewModel: PlayerDetailsViewModel = koinViewModel<PlayerDetailsViewModel>(),
-    onTeamClick: (Int) -> Unit
+    onTeamClick: (Int) -> Unit,
+    onBack: () -> Unit
 ) {
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 
     PlayerDetailsScreenImpl(
         playerDetails = state.value.player,
         isLoading = state.value.isLoading,
-        onTeamClick = onTeamClick
+        onTeamClick = onTeamClick,
+        onBack = onBack
     )
 }
 
@@ -56,11 +63,22 @@ fun PlayerDetailsScreenImpl(
     playerDetails: Player? = null,
     isLoading: Boolean = false,
     onTeamClick: (Int) -> Unit = {},
+    onBack: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Player Details") }
+                title = { Text("Player Details") },
+                navigationIcon = {
+                    IconButton(
+                        onClick = { onBack() }
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
             )
         }
     ) { innerPadding ->

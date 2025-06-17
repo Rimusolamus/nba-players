@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -28,9 +27,11 @@ fun NavigationRoot(
 ) {
     val backStack = rememberNavBackStack(AllPlayersNav)
 
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background)) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
 
         NavDisplay(
             modifier = modifier,
@@ -57,6 +58,9 @@ fun NavigationRoot(
                             },
                             onTeamClick = { teamId ->
                                 backStack.add(TeamDetailsNav(teamId))
+                            },
+                            onBack = {
+                                backStack.removeLastOrNull()
                             }
                         )
                     }
@@ -65,6 +69,9 @@ fun NavigationRoot(
                         TeamDetailsScreen(
                             viewModel = koinViewModel {
                                 parametersOf(key.teamId)
+                            },
+                            onBack = {
+                                backStack.removeLastOrNull()
                             }
                         )
                     }

@@ -2,7 +2,6 @@ package cz.home.nbaplayers.feature.teamdetails.data
 
 import cz.home.nbaplayers.feature.teamdetails.domain.RemoteTeamDetailRepository
 import cz.home.nbaplayers.feature.teamdetails.model.Team
-import cz.home.nbaplayers.feature.teamdetails.toModel
 import cz.home.nbaplayers.library.data.infrastructure.LoadableData
 import cz.home.nbaplayers.library.networking.data.AbstractApi
 import cz.home.nbaplayers.library.networking.infrastructure.ApiService
