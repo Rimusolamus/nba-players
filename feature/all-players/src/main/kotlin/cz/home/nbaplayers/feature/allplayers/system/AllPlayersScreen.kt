@@ -112,7 +112,7 @@ private fun PlayerList(
                                     .height(64.dp)
                                     .align(Alignment.CenterVertically),
                             )
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Column(
                                 modifier = Modifier
                                     .padding(8.dp)
