@@ -27,7 +27,7 @@ class AbstractApi {
 
 
 
-    suspend fun <DTO, MODEL> requestSynchronous(
+    private suspend fun <DTO, MODEL> requestSynchronous(
         doRequest: suspend () -> Response<DTO>,
         parseDto: (DTO.() -> MODEL),
     ): ResultData<MODEL> {
