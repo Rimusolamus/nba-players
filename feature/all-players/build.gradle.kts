@@ -35,6 +35,9 @@ dependencies {
     implementation(libs.di.koin.android)
     implementation(libs.di.koin.compose)
 
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.compose)
+
     implementation(platform(libs.networking.retrofit2.bom))
     implementation(libs.networking.retrofit2.retrofit)
 

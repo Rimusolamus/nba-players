@@ -6,5 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteAllPlayersRepository {
 
-    suspend fun getAllPlayers() : Flow<LoadableData<List<Player>>>
+    suspend fun getAllPlayers(
+        page: Int,
+        perPage: Int
+    ): List<Player>
 }

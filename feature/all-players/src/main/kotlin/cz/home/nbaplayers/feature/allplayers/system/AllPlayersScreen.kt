@@ -22,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import cz.home.nbaplayers.feature.allplayers.model.Player
 import cz.home.nbaplayers.feature.allplayers.presentation.AllPlayersViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -34,12 +36,13 @@ fun AllPlayersScreen(
     val viewModel = koinViewModel<AllPlayersViewModel>()
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 
+    val players = viewModel.players.collectAsLazyPagingItems()
+
     AllPlayersScreenImpl(
         modifier = modifier,
-        players = state.value.players,
+        players = players,
         isLoading = state.value.isLoading,
         onPlayerClick = onPlayerClick,
-        onRefresh = viewModel::onRefresh,
     )
 }
 
@@ -47,7 +50,7 @@ fun AllPlayersScreen(
 @Composable
 private fun AllPlayersScreenImpl(
     modifier: Modifier = Modifier,
-    players: List<Player>?,
+    players: LazyPagingItems<Player>,
     isLoading: Boolean = false,
     onPlayerClick: (Int) -> Unit,
     onRefresh: () -> Unit = {},
@@ -74,26 +77,37 @@ private fun AllPlayersScreenImpl(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                players?.size?.let {
-                    items(it) { index ->
+                items(players.itemCount) { index ->
+
+                    if (players[index] != null) {
                         ListItem(
                             headlineContent = {
                                 Row {
-                                    Column(modifier = Modifier
-                                        .padding(8.dp)
-                                        .weight(1f)) {
-                                        Text(
-                                            text = "${players[index].firstName} ${players[index].lastName}",
-                                        )
+                                    Column(
+                                        modifier = Modifier
+                                            .padding(8.dp)
+                                            .weight(1f)
+                                    ) {
+                                        players[index]?.let {
+                                            players[index]?.let { it1 ->
+                                                Text(
+                                                    text = "${it1.firstName} ${it.lastName}",
+                                                )
+                                            }
+                                        }
                                         Spacer(modifier = Modifier.height(8.dp))
+                                        players[index]?.let {
+                                            Text(
+                                                text = "Position: ${it.position}",
+                                            )
+                                        }
+                                    }
+                                    players[index]?.team?.let {
                                         Text(
-                                            text = "Position: ${players[index].position}",
+                                            text = it.name,
+                                            modifier = Modifier.padding(8.dp)
                                         )
                                     }
-                                    Text(
-                                        text = players[index].team.name,
-                                        modifier = Modifier.padding(8.dp)
-                                    )
                                 }
                             },
                             modifier = Modifier
@@ -101,7 +115,7 @@ private fun AllPlayersScreenImpl(
                                 .animateItem()
                                 .fillParentMaxWidth()
                                 .padding(horizontal = 8.dp, vertical = 0.dp)
-                                .clickable { onPlayerClick(players[index].id) }
+                                .clickable { onPlayerClick(players[index]!!.id) }
                         )
                     }
                 }

@@ -25,7 +25,9 @@ class AbstractApi {
         emit(requestSynchronous(fetchData, parseDto).toLoadableData())
     }
 
-    private suspend fun <DTO, MODEL> requestSynchronous(
+
+
+    suspend fun <DTO, MODEL> requestSynchronous(
         doRequest: suspend () -> Response<DTO>,
         parseDto: (DTO.() -> MODEL),
     ): ResultData<MODEL> {
