@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import cz.home.nbaplayers.feature.allplayers.model.Player
 
-class GetAllPlayersUseCase(
+internal class GetAllPlayersUseCase(
     private val remoteAllPlayersRepository: RemoteAllPlayersRepository
 ) : PagingSource<Int, Player>() {
 

@@ -8,11 +8,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import cz.home.nbaplayers.feature.allplayers.domain.GetAllPlayersUseCase
 import cz.home.nbaplayers.feature.allplayers.model.Player
-import cz.home.nbaplayers.library.data.infrastructure.Data
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 internal class AllPlayersViewModel(
     getAllPlayers: GetAllPlayersUseCase
@@ -32,7 +30,6 @@ internal class AllPlayersViewModel(
     ).flow.cachedIn(viewModelScope)
 
     data class State(
-        val players: List<Player>? = null,
         val isLoading: Boolean = false,
         val error: Throwable? = null
     )
