@@ -19,9 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import cz.home.nbaplayers.feature.allplayers.model.Player
@@ -34,14 +35,11 @@ fun AllPlayersScreen(
     modifier: Modifier = Modifier
 ) {
     val viewModel = koinViewModel<AllPlayersViewModel>()
-    val state = viewModel.uiState.collectAsStateWithLifecycle()
-
     val players = viewModel.players.collectAsLazyPagingItems()
 
     AllPlayersScreenImpl(
         modifier = modifier,
         players = players,
-        isLoading = state.value.isLoading,
         onPlayerClick = onPlayerClick,
     )
 }
@@ -51,9 +49,7 @@ fun AllPlayersScreen(
 private fun AllPlayersScreenImpl(
     modifier: Modifier = Modifier,
     players: LazyPagingItems<Player>,
-    isLoading: Boolean = false,
     onPlayerClick: (Int) -> Unit,
-    onRefresh: () -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier,
@@ -63,62 +59,81 @@ private fun AllPlayersScreenImpl(
             )
         }
     ) { innerPadding ->
-        PullToRefreshBox(
-            isRefreshing = isLoading,
-            onRefresh = onRefresh,
-            modifier = Modifier.padding(
-                top = innerPadding.calculateTopPadding(),
-                bottom = innerPadding.calculateBottomPadding()
-            )
-        )
-        {
-            LazyColumn(
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxSize()
+        if (players.itemCount == 0) {
+            PullToRefreshBox(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                isRefreshing = players.loadState.refresh is LoadState.Loading,
+                onRefresh = { players.refresh() }
             ) {
-                items(players.itemCount) { index ->
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "No players found")
+                }
+            }
+        } else {
+            PlayerList(
+                players = players,
+                onPlayerClick = onPlayerClick,
+            )
+        }
+    }
+}
 
-                    if (players[index] != null) {
-                        ListItem(
-                            headlineContent = {
-                                Row {
-                                    Column(
-                                        modifier = Modifier
-                                            .padding(8.dp)
-                                            .weight(1f)
-                                    ) {
-                                        players[index]?.let {
-                                            players[index]?.let { it1 ->
-                                                Text(
-                                                    text = "${it1.firstName} ${it.lastName}",
-                                                )
-                                            }
-                                        }
-                                        Spacer(modifier = Modifier.height(8.dp))
-                                        players[index]?.let {
-                                            Text(
-                                                text = "Position: ${it.position}",
-                                            )
-                                        }
-                                    }
-                                    players[index]?.team?.let {
+@Composable
+private fun PlayerList(
+    players: LazyPagingItems<Player>,
+    onPlayerClick: (Int) -> Unit,
+) {
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.fillMaxSize()
+    ) {
+        items(players.itemCount) { index ->
+
+            if (players[index] != null) {
+                ListItem(
+                    headlineContent = {
+                        Row {
+                            Column(
+                                modifier = Modifier
+                                    .padding(8.dp)
+                                    .weight(1f)
+                            ) {
+                                players[index]?.let {
+                                    players[index]?.let { it1 ->
                                         Text(
-                                            text = it.name,
-                                            modifier = Modifier.padding(8.dp)
+                                            text = "${it1.firstName} ${it.lastName}",
                                         )
                                     }
                                 }
-                            },
-                            modifier = Modifier
-                                .background(MaterialTheme.colorScheme.primary)
-                                .animateItem()
-                                .fillParentMaxWidth()
-                                .padding(horizontal = 8.dp, vertical = 0.dp)
-                                .clickable { onPlayerClick(players[index]!!.id) }
-                        )
-                    }
-                }
+                                Spacer(modifier = Modifier.height(8.dp))
+                                players[index]?.let {
+                                    Text(
+                                        text = "Position: ${it.position}",
+                                    )
+                                }
+                            }
+                            players[index]?.team?.let {
+                                Text(
+                                    text = it.name,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary)
+                        .animateItem()
+                        .fillParentMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 0.dp)
+                        .clickable { onPlayerClick(players[index]!!.id) }
+                )
             }
         }
     }
