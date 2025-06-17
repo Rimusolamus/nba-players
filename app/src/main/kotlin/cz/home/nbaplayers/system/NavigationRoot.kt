@@ -18,8 +18,6 @@ import cz.home.nbaplayers.feature.teamdetails.system.TeamDetailsScreen
 import cz.home.nbaplayers.model.AllPlayersNav
 import cz.home.nbaplayers.model.PlayerDetailsNav
 import cz.home.nbaplayers.model.TeamDetailsNav
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun NavigationRoot(

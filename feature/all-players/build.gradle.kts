@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
 
+    implementation(libs.androidx.glide)
+
     implementation(platform(libs.networking.retrofit2.bom))
     implementation(libs.networking.retrofit2.retrofit)
 

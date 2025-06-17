@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml:2:13-83
-INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml:2:13-83
+ADDED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml:2:13-83
+INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml:2:13-83
 	package
-		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml
+		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml
 	xmlns:android
-		ADDED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml:2:23-81
+		ADDED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml:2:23-81
 uses-sdk
-INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml reason: use-sdk injection requested
-INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml
-INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml
+INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml reason: use-sdk injection requested
+INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml
+INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml
 	android:targetSdkVersion
-		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml
+		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml
 	android:minSdkVersion
-		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest14435805721422697050.xml
+		INJECTED from /Users/sergey.kalistratov/StudioProjects/NBAplayers/feature/player-details/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13102188313926130543.xml

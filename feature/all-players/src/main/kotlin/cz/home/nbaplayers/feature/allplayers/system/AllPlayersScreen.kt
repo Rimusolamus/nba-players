@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
@@ -25,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import cz.home.nbaplayers.feature.allplayers.model.Player
 import cz.home.nbaplayers.feature.allplayers.presentation.AllPlayersViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -84,6 +87,7 @@ private fun AllPlayersScreenImpl(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlayerList(
     players: LazyPagingItems<Player>,
@@ -100,6 +104,15 @@ private fun PlayerList(
                 ListItem(
                     headlineContent = {
                         Row {
+                            GlideImage(
+                                model = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEAVra7EKmhSuXR5x0vaYjrSRQj7cOPOCWjrperPk7p0SWbzT-qHhCTetEb6XklcUtAU09yhQ_1wBhboORXwok6HXSvNfc2QosleTDVCIfop_gRcwrDBTjj8prz26tpeAIfv8CAabOe_w/s0/Jumpman-Logo-Wallpaper-Feat-New-Symbol-Pic-Full-1920a80-.jpg",
+                                contentDescription = "Player Image",
+                                modifier = Modifier
+                                    .width(64.dp)
+                                    .height(64.dp)
+                                    .align(Alignment.CenterVertically),
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
                             Column(
                                 modifier = Modifier
                                     .padding(8.dp)
